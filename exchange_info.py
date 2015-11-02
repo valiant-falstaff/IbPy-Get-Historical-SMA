@@ -1,7 +1,7 @@
 import pytz, re
 from datetime import datetime, time as dttime
 
-trading_exchange_timezone = pytz.timezone('US/Eastern') #print(pytz.all_timezones) for all timezone strings
+trading_exchange_timezone = pytz.timezone('US/Eastern')
 exchange_opening_time = dttime(hour=9, minute = 30)
 exchange_normal_close_time = dttime(hour=16)
 exchange_early_close_time = dttime(hour=13)
@@ -94,9 +94,9 @@ trading_holidays = ( #US Exchanges
 def convert_trading_holiday_datestrings_into_date_objects(trading_holidays):
     """
     Args:
-        trading_holidays (list/tuple): a list of 2-tuples; 1st item of each tuple:
-            a datestring formatted as mm/dd/YYYY or m/d/YYYY (zero-padding not
-            necessary); 2nd item: 'full day' or 'early close'
+        trading_holidays (list/tuple): a list of 2-tuples; 1st item of each
+            tuple: a datestring formatted as mm/dd/YYYY or m/d/YYYY
+            (zero-padding not necessary); 2nd item: 'full day' or 'early close'
     Returns:
         list of 2-tuples with first item in each tuple converted to a
         datetime.date obj
@@ -107,7 +107,8 @@ def convert_trading_holiday_datestrings_into_date_objects(trading_holidays):
         date = holiday[0].strip() #strip leading and trailing whitespace
         match = re.fullmatch('(\d{1,2})/(\d{1,2})/(\d{4})', date)
         if not match:
-            raise Exception("Syntax of date {} in the trading holidays list is invalid".format(date))
+            raise Exception("Syntax of date {} in the trading holidays list "
+                "is invalid".format(date))
         
         #zero-pad month and day if necessary
         month, day, year = match.group(1, 2, 3)
@@ -116,9 +117,11 @@ def convert_trading_holiday_datestrings_into_date_objects(trading_holidays):
         if len(day) == 1:
             day = "0{}".format(day)
         
-        converted_date = datetime.strptime('{}/{}/{}'.format(month, day, year), '%m/%d/%Y').date()
+        converted_date = datetime.strptime('{}/{}/{}'.format(month, day, year),
+            '%m/%d/%Y').date()
         converted_trading_holidays.append( (converted_date, holiday[1]) )
     
     return converted_trading_holidays
 
-trading_holidays = convert_trading_holiday_datestrings_into_date_objects(trading_holidays)
+trading_holidays = convert_trading_holiday_datestrings_into_date_objects(
+    trading_holidays)
