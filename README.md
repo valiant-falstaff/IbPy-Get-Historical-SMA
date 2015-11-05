@@ -1,0 +1,2 @@
+#Get a Historical SMA with Interactive Brokers and IbPy
+The [Interactive Brokers API](https://www.interactivebrokers.com/en/?f=%2Fen%2Fsoftware%2Fibapi.php&ns=T) doesn't offer a simple way to get a historical Simple Moving Average, so this package offers a _get_historical_sma()_ function that you can use with IbPy to take the pain out of getting historical SMAs. See [my blog post](http://valiant-falstaff.github.io/IbPy-historical-sma/) for full details and instructions.
